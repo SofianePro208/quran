@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quran | القرآن الكريم</title>
+    <meta name="description" content="A comprehensive Quran application with per-ayah Tafsir, actions, bookmarks, customizable fonts, and multiple listening modes.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=KFGQPC+Uthman+Taha+Naskh&family=Lora:ital,wght@0,400;1,400&family=Poppins:wght@300;400;600&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <header>
+        <div class="header-content">
+            <h1 data-translate="appTitle">The Quran</h1>
+            <p data-translate="appSubtitle">Your path to reflection and understanding</p>
+        </div>
+        <div class="controls">
+            <button id="lang-toggle" aria-label="Toggle Language">ع</button>
+            <button id="theme-toggle" aria-label="Toggle theme"></button>
+        </div>
+    </header>
+
+    <nav class="main-modes">
+        <button class="mode-btn active" data-mode="reading" data-translate="modeReading">Reading</button>
+        <button class="mode-btn" data-mode="listening" data-translate="modeListening">Listening</button>
+        <button class="mode-btn" data-mode="radio" data-translate="modeRadio">Live Radio</button>
+        <button class="mode-btn" data-mode="bookmarks" data-translate="modeBookmarks">Bookmarks</button>
+        <button class="mode-btn" data-mode="contact" data-translate="modeContact">Contact Us</button>
+    </nav>
+
+    <main>
+        <!-- Reading Mode View -->
+        <div id="reading-view" class="view active">
+            <div class="quran-container">
+                <aside class="surah-list-container">
+                    <div class="sidebar-header">
+                        <h2 data-translate="chaptersTitle">The Chapters</h2>
+                        <button id="toggle-settings-btn" class="sidebar-action-btn" aria-label="Toggle Settings"></button>
+                    </div>
+
+                    <div class="sidebar-scroll-wrapper">
+                        <div class="sidebar-search-wrapper">
+                            <input type="text" id="surah-search-input" class="search-input" placeholder="Search Surah...">
+                        </div>
+                        
+                        <div class="sidebar-settings-wrapper">
+                            <!-- Reading Settings -->
+                            <div class="font-settings">
+                                <h3 class="settings-title" data-translate="readingSettings">Reading Settings</h3>
+                                <div class="form-group">
+                                    <label for="font-size-slider" data-translate="fontSize">Font Size</label>
+                                    <input type="range" id="font-size-slider" min="1.5" max="4" step="0.1" value="2.5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="font-type-select" data-translate="fontType">Quranic Font</label>
+                                    <select id="font-type-select">
+                                        <option value="'KFGQPC Uthman Taha Naskh', serif">Uthman Taha Naskh</option>
+                                        <option value="'Amiri Quran', serif">Amiri Quran</option>
+                                        <option value="'Scheherazade New', serif">Scheherazade New</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Audio Settings for Reading Mode -->
+                            <div class="reading-audio-settings">
+                                 <h3 class="settings-title" data-translate="audioSettings">Audio Settings</h3>
+                                <div class="select-group"><label for="reciter-select-reading" data-translate="selectReciter">Select Reciter</label><select id="reciter-select-reading" data-role="reciter-select"></select></div>
+                                <div class="select-group"><label for="riwaya-select-reading" data-translate="selectNarration">Select Narration</label><select id="riwaya-select-reading" data-role="riwaya-select" disabled></select></div>
+                            </div>
+                        </div>
+
+                        <div class="surah-list" id="surah-list-reading"></div>
+                    </div>
+                </aside>
+                <section class="surah-display-container">
+                    <div class="content-frame">
+                        <div id="ayah-container" class="ayah-container">
+                            <div class="ayah-placeholder" data-translate="readingPlaceholder">Select a Surah from the list to begin reading.</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Listening Mode View -->
+        <div id="listening-view" class="view">
+            <div class="view-header">
+                <h2 class="view-title" data-translate="listeningTitle">Surah Audio Player</h2>
+                <div class="audio-filters">
+                    <div class="select-group"><label for="reciter-select-listening" data-translate="selectReciter">1. Select Reciter</label><select id="reciter-select-listening" data-role="reciter-select"></select></div>
+                    <div class="select-group"><label for="riwaya-select-listening" data-translate="selectNarration">2. Select Narration</label><select id="riwaya-select-listening" data-role="riwaya-select" disabled></select></div>
+                </div>
+                <div class="view-controls">
+                    <input type="text" id="listening-search-input" class="search-input" placeholder="Search Surah...">
+                </div>
+            </div>
+            <div id="surah-list-listening" class="item-grid"></div>
+        </div>
+
+        <!-- Radio Mode View -->
+        <div id="radio-view" class="view">
+            <div class="view-header">
+                <h2 class="view-title" data-translate="liveQuranRadio">Live Quran Radio</h2>
+                <div class="view-controls">
+                    <input type="text" id="radio-search-input" class="search-input" placeholder="Search Radio Station...">
+                </div>
+            </div>
+            <div id="radio-list" class="item-grid"></div>
+        </div>
+        
+        <!-- Bookmarks View -->
+        <div id="bookmarks-view" class="view">
+            <div class="view-header">
+                <h2 class="view-title" data-translate="bookmarksTitle">My Bookmarks</h2>
+            </div>
+            <div id="bookmarks-list" class="bookmarks-list">
+                <p class="ayah-placeholder" data-translate="noBookmarks">You have no saved bookmarks yet.</p>
+            </div>
+        </div>
+        
+        <!-- Contact Us View -->
+        <div id="contact-view" class="view">
+            <div class="view-header">
+                <h2 class="view-title" data-translate="contactTitle">Contact Us</h2>
+            </div>
+            <div class="contact-form-container">
+                <form id="contact-form">
+                    <div class="form-group"><label for="name" data-translate="labelName">Name</label><input type="text" id="name" name="name" required></div>
+                    <div class="form-group"><label for="email" data-translate="labelEmail">Email</label><input type="email" id="email" name="email" required></div>
+                    <div class="form-group"><label for="message" data-translate="labelMessage">Message</label><textarea id="message" name="message" rows="6" required></textarea></div>
+                    <button type="submit" class="submit-btn" data-translate="buttonSubmit">Submit</button>
+                </form>
+                <div id="form-success-message" class="form-success"><p data-translate="formSuccess">Thank you for your message!</p></div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Global Player Bar -->
+    <div id="global-player-bar" class="global-player-bar">
+        <button id="main-play-btn" aria-label="Play/Pause"></button>
+        <span id="current-time" class="time-display">0:00</span>
+        <div id="seek-bar-container" class="seek-bar-container"><div id="seek-bar-progress" class="seek-bar-progress"></div><div id="seek-thumb" class="seek-thumb"></div></div>
+        <span id="total-duration" class="time-display">0:00</span>
+    </div>
+
+    <audio id="single-ayah-player"></audio>
+    <audio id="audio-player"></audio>
+    <button id="scroll-to-top-btn" aria-label="Scroll to top"></button>
+    <div id="loader" class="loader-overlay"><div class="loader-spinner"></div></div>
+
+</body>
+<script src="script.js"></script>
+</html>
