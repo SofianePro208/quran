@@ -12,6 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=KFGQPC+Uthman+Taha+Naskh&family=Lora:ital,wght@0,400;1,400&family=Poppins:wght@300;400;600&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
+    	    <link rel="icon" type="image/png" href="quranwy.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="quranway.svg" />
+    <link rel="shortcut icon" href="quranway.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="quranway.png" />
+    <link rel="manifest" href="site.webmanifest" />
 </head>
 <body>
 
@@ -29,16 +34,16 @@
     </header>
 
     <nav class="main-modes">
-        <button class="mode-btn active" data-mode="reading" data-translate="modeReading">Reading</button>
-        <button class="mode-btn" data-mode="listening" data-translate="modeListening">Listening</button>
-        <button class="mode-btn" data-mode="radio" data-translate="modeRadio">Live Radio</button>
-        <button class="mode-btn" data-mode="bookmarks" data-translate="modeBookmarks">Bookmarks</button>
-        <button class="mode-btn" data-mode="contact" data-translate="modeContact">Contact Us</button>
+        <a href="#reading" class="mode-btn active" data-mode="reading" data-translate="modeReading">Reading</a>
+        <a href="#listening" class="mode-btn" data-mode="listening" data-translate="modeListening">Listening</a>
+        <a href="#radio" class="mode-btn" data-mode="radio" data-translate="modeRadio">Live Radio</a>
+        <a href="#bookmarks" class="mode-btn" data-mode="bookmarks" data-translate="modeBookmarks">Bookmarks</a>
+        <a href="#contact" class="mode-btn" data-mode="contact" data-translate="modeContact">Contact Us</a>
     </nav>
 
     <main>
         <!-- Reading Mode View -->
-        <div id="reading-view" class="view active">
+        <div id="reading-view" class="view">
             <div class="quran-container">
                 <aside class="surah-list-container">
                     <div class="sidebar-header">
@@ -52,28 +57,8 @@
                         </div>
                         
                         <div class="sidebar-settings-wrapper">
-                            <!-- Reading Settings -->
-                            <div class="font-settings">
-                                <h3 class="settings-title" data-translate="readingSettings">Reading Settings</h3>
-                                <div class="form-group">
-                                    <label for="font-size-slider" data-translate="fontSize">Font Size</label>
-                                    <input type="range" id="font-size-slider" min="1.5" max="4" step="0.1" value="2.5">
-                                </div>
-                                <div class="form-group">
-                                    <label for="font-type-select" data-translate="fontType">Quranic Font</label>
-                                    <select id="font-type-select">
-                                        <option value="'KFGQPC Uthman Taha Naskh', serif">Uthman Taha Naskh</option>
-                                        <option value="'Amiri Quran', serif">Amiri Quran</option>
-                                        <option value="'Scheherazade New', serif">Scheherazade New</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- Audio Settings for Reading Mode -->
-                            <div class="reading-audio-settings">
-                                 <h3 class="settings-title" data-translate="audioSettings">Audio Settings</h3>
-                                <div class="select-group"><label for="reciter-select-reading" data-translate="selectReciter">Select Reciter</label><select id="reciter-select-reading" data-role="reciter-select"></select></div>
-                                <div class="select-group"><label for="riwaya-select-reading" data-translate="selectNarration">Select Narration</label><select id="riwaya-select-reading" data-role="riwaya-select" disabled></select></div>
-                            </div>
+                            <div class="font-settings"><h3 class="settings-title" data-translate="readingSettings">Reading Settings</h3><div class="form-group"><label for="font-size-slider" data-translate="fontSize">Font Size</label><input type="range" id="font-size-slider" min="1.5" max="4" step="0.1" value="2.5"></div><div class="form-group"><label for="font-type-select" data-translate="fontType">Quranic Font</label><select id="font-type-select"><option value="'KFGQPC Uthman Taha Naskh', serif">Uthman Taha Naskh</option><option value="'Amiri Quran', serif">Amiri Quran</option><option value="'Scheherazade New', serif">Scheherazade New</option></select></div></div>
+                            <div class="reading-audio-settings"><h3 class="settings-title" data-translate="audioSettings">Audio Settings</h3><div class="select-group"><label for="reciter-select-reading" data-translate="selectReciter">Select Reciter</label><select id="reciter-select-reading" data-role="reciter-select"></select></div><div class="select-group"><label for="riwaya-select-reading" data-translate="selectNarration">Select Narration</label><select id="riwaya-select-reading" data-role="riwaya-select" disabled></select></div></div>
                         </div>
 
                         <div class="surah-list" id="surah-list-reading"></div>
@@ -89,55 +74,37 @@
             </div>
         </div>
 
-        <!-- Listening Mode View -->
+        <!-- Other Views -->
         <div id="listening-view" class="view">
-            <div class="view-header">
-                <h2 class="view-title" data-translate="listeningTitle">Surah Audio Player</h2>
-                <div class="audio-filters">
-                    <div class="select-group"><label for="reciter-select-listening" data-translate="selectReciter">1. Select Reciter</label><select id="reciter-select-listening" data-role="reciter-select"></select></div>
-                    <div class="select-group"><label for="riwaya-select-listening" data-translate="selectNarration">2. Select Narration</label><select id="riwaya-select-listening" data-role="riwaya-select" disabled></select></div>
-                </div>
-                <div class="view-controls">
-                    <input type="text" id="listening-search-input" class="search-input" placeholder="Search Surah...">
-                </div>
-            </div>
-            <div id="surah-list-listening" class="item-grid"></div>
+            <div class="view-header"><h2 class="view-title" data-translate="listeningTitle">Surah Audio Player</h2><div class="audio-filters"><div class="select-group"><label for="reciter-select-listening" data-translate="selectReciter">1. Select Reciter</label><select id="reciter-select-listening" data-role="reciter-select"></select></div><div class="select-group"><label for="riwaya-select-listening" data-translate="selectNarration">2. Select Narration</label><select id="riwaya-select-listening" data-role="riwaya-select" disabled></select></div></div><div class="view-controls"><input type="text" id="listening-search-input" class="search-input" placeholder="Search Surah..."></div></div><div id="surah-list-listening" class="item-grid"></div>
         </div>
-
-        <!-- Radio Mode View -->
         <div id="radio-view" class="view">
-            <div class="view-header">
-                <h2 class="view-title" data-translate="liveQuranRadio">Live Quran Radio</h2>
-                <div class="view-controls">
-                    <input type="text" id="radio-search-input" class="search-input" placeholder="Search Radio Station...">
-                </div>
-            </div>
-            <div id="radio-list" class="item-grid"></div>
+            <div class="view-header"><h2 class="view-title" data-translate="liveQuranRadio">Live Quran Radio</h2><div class="view-controls"><input type="text" id="radio-search-input" class="search-input" placeholder="Search Radio Station..."></div></div><div id="radio-list" class="item-grid"></div>
         </div>
-        
-        <!-- Bookmarks View -->
         <div id="bookmarks-view" class="view">
-            <div class="view-header">
-                <h2 class="view-title" data-translate="bookmarksTitle">My Bookmarks</h2>
-            </div>
-            <div id="bookmarks-list" class="bookmarks-list">
-                <p class="ayah-placeholder" data-translate="noBookmarks">You have no saved bookmarks yet.</p>
-            </div>
+            <div class="view-header"><h2 class="view-title" data-translate="bookmarksTitle">My Bookmarks</h2></div><div id="bookmarks-list" class="bookmarks-list"><p class="ayah-placeholder" data-translate="noBookmarks">You have no saved bookmarks yet.</p></div>
         </div>
-        
-        <!-- Contact Us View -->
         <div id="contact-view" class="view">
-            <div class="view-header">
-                <h2 class="view-title" data-translate="contactTitle">Contact Us</h2>
-            </div>
+            <div class="view-header"><h2 class="view-title" data-translate="contactTitle">Contact Us</h2></div>
             <div class="contact-form-container">
-                <form id="contact-form">
+                <div id="form-success-message" class="form-success"><p data-translate="formSuccess">Thank you for your message!</p></div>
+                <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p class="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
                     <div class="form-group"><label for="name" data-translate="labelName">Name</label><input type="text" id="name" name="name" required></div>
                     <div class="form-group"><label for="email" data-translate="labelEmail">Email</label><input type="email" id="email" name="email" required></div>
                     <div class="form-group"><label for="message" data-translate="labelMessage">Message</label><textarea id="message" name="message" rows="6" required></textarea></div>
-                    <button type="submit" class="submit-btn" data-translate="buttonSubmit">Submit</button>
+                    <button type="submit" class="submit-btn" id="submit-btn" data-translate="buttonSubmit">Submit</button>
                 </form>
-                <div id="form-success-message" class="form-success"><p data-translate="formSuccess">Thank you for your message!</p></div>
+            </div>
+        </div>
+        <!-- 404 Not Found View -->
+        <div id="not-found-view" class="view">
+            <div class="not-found-container">
+                <div class="not-found-code">404</div>
+                <h2 class="view-title" data-translate="notFoundTitle">Page Not Found</h2>
+                <p data-translate="notFoundMessage">The page you are looking for does not exist.</p>
+                <a href="#reading" class="submit-btn" data-translate="goHome">Go to Homepage</a>
             </div>
         </div>
     </main>
